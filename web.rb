@@ -8,7 +8,7 @@ configure do
 	set :twitter, Twitter::Client.new
 end
 
-def random_string do
+def random_string()
 	arr = Array.new
 	arr << 'So Coded - So Code!'
 	arr << '<3 <3 <3'
