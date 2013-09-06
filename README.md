@@ -6,8 +6,14 @@ socoded top secret stuff
 
 ```
 POST / HTTP/1.1
-Host: so-statements.herokuapp.com
+Host: printer.socoded.com
 Cache-Control: no-cache
 
 Your text goes here!
 ```
+
+```bash
+curl XXX
+```
+
+#Push the button!!!111
