@@ -26,4 +26,5 @@ end
 post '/' do
 	request.body.rewind  # in case someone already read it
 	settings.redis.sadd :phrases, request.body.read
+	'Push the button!!!111'
 end
