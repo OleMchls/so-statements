@@ -13,7 +13,7 @@ Your text goes here!
 ```
 
 ```bash
-curl XXX
+curl -X POST -d 'Hello socoded folks!' printer.socoded.com
 ```
 
 #Push the button!!!111
