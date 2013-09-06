@@ -11,8 +11,8 @@ trap(:INT) { puts; exit }
 begin
 	redis.subscribe(:refil) do |on|
 		on.message do |channel, message|
-			tweets = twitter.search("#socoded -rt", :count => 50).results
-			queue.sadd :phrases, tweets.sample.text
+			tweet = twitter.search("#socoded -rt", :count => 50).results.sample
+			queue.sadd :phrases, "#{tweet.text}\n\ - #{tweet.user.name} (@#{tweet.user.screen_name})"
 		end
 	end
 rescue Redis::BaseConnectionError => error

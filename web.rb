@@ -19,7 +19,7 @@ end
 get '/' do
 	settings.redis.publish :refil, 'bums'
 	text = settings.redis.spop :phrases
-	random_string if text == nil
+	return random_string if text == nil
 	text
 end
 
