@@ -13,17 +13,14 @@ def random_string()
 	arr << 'So Coded - So Code!'
 	arr << '<3 <3 <3'
 	arr << 'This conference is brought to you by @walski & @CodeStars & @seppsepp'
-	arr << 'Julia und Elena sind so clever, und sooo toll und so intelligent und überhaupt und sowieso <3'
-	arr << 'O - Stone'
-	arr << 'Y - Sciccors'
-	arr << '+ - Paper'
 	arr.sample
 end
 
 get '/' do
+	settings.redis.publish :refil, 'bums'
 	text = settings.redis.spop :phrases
-	return text unless text == nil
-	random_string
+	random_string if text == nil
+	text
 end
 
 post '/' do
