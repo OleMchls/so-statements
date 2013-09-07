@@ -18,13 +18,13 @@ end
 
 get '/' do
 	settings.redis.publish :refil, 'bums'
-	text = settings.redis.spop :phrases
-	return random_string if text == nil
-	text
+	settings.redis.spop(:phrases) || settings.redis.spop(:twitter) || random_string
 end
 
 post '/' do
 	request.body.rewind  # in case someone already read it
-	settings.redis.sadd :phrases, request.body.read
+	text = request.body.read
+	settings.redis.sadd :phrases, text
+	settings.redis.rpush :log, "#{Time.now}|#{text}"
 	'Push the button!!!111'
 end

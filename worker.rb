@@ -13,8 +13,7 @@ begin
 	redis.subscribe(:refil) do |on|
 		on.message do |channel, message|
 			tweet = twitter.search("#socoded -rt", :count => 50).results.sample
-			p tweet
-			queue.sadd :phrases, "#{HTMLEntities.new.decode(tweet.text)}\n\ - #{tweet.user.name} (@#{tweet.user.screen_name})"
+			queue.sadd :twitter, "#{HTMLEntities.new.decode(tweet.text)}\n\ - #{tweet.user.name} (@#{tweet.user.screen_name})"
 		end
 	end
 rescue Redis::BaseConnectionError => error
